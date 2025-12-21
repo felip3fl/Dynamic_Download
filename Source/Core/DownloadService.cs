@@ -16,25 +16,25 @@ namespace Core
         {
             var video = new Video();
 
-            LoadVideo();
+            //LoadVideo();
 
             video.Url = RemoveAdditionalParameters(url);
 
-            if (CheckIfExistVideo(video.Url))
-                return false;
+            //if (CheckIfExistVideo(video.Url))
+            //    return false;
 
-            terminal.ShowConsoleParameters();
+            //terminal.ShowConsoleParameters();
 
-            var consoleMessage = terminal.CheckVideoDetails(url);
+            //var consoleMessage = terminal.CheckVideoDetails(url);
 
-            if (!string.IsNullOrEmpty(consoleMessage))
-            {
-                var listOfMessages = ConvertMessageToList(consoleMessage);
-                ShowErroConsole(listOfMessages);
-                video.RealizeDate = CheckReturn(listOfMessages);
-                SalveVideo();
-                return false;
-            }
+            //if (!string.IsNullOrEmpty(consoleMessage))
+            //{
+            //    var listOfMessages = ConvertMessageToList(consoleMessage);
+            //    ShowErroConsole(listOfMessages);
+            //    video.RealizeDate = CheckReturn(listOfMessages);
+            //    //SalveVideo();
+            //    return false;
+            //}
 
 
             terminal.Download(url);
