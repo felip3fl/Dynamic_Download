@@ -5,8 +5,20 @@ namespace Infra
 {
     public class Terminal
     {
-        readonly string executableAddress = "yt-dlp";
-        readonly string parameters = "--check-formats --console-title --sponsorblock-remove sponsor,selfpromo -f \"bestvideo[height<=1440]+(ba[format_note*=original]/ba)\" -o \"%(channel)s - %(title)s.%(ext)s\" --all-subs --embed-subs --add-metadata";
+        readonly string executableAddress = "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe";
+        readonly List<string> parameters = [
+            "--check-formats",
+            "--sponsorblock-remove sponsor,selfpromo",
+            "--console-title",
+            "-f $format",
+            "'bestvideo[height<=1440]+(ba[format_note*=original]/ba)'", 
+            "-o '%(channel)s - %(title)s.%(ext)s'",
+            "-P 'temp:D:\\Downloads'",
+            "--sub-langs 'enUS,en,en-US,pt,ptBR,pt-BR,br'",
+            "--embed-subs",
+            "--embed-thumbnail",
+            "--add-metadata",
+            ];
 
         public bool Download(string videoAddress)
         {
@@ -15,9 +27,10 @@ namespace Infra
 
             startInfo.FileName         = executableAddress;
             startInfo.WorkingDirectory = @"D:\Videos\Youtube Temp\";
-            startInfo.Arguments        = parameters + " " + videoAddress;
+            startInfo.Arguments        = "yt-dlp " + string.Join(" ", parameters) + " " + videoAddress;
             process.StartInfo          = startInfo;
 
+            Console.WriteLine($"{string.Join(" ", parameters)} \n");
             process.Start();
 
             return true;
@@ -33,7 +46,7 @@ namespace Infra
         public void ShowConsoleParameters()
         {
             Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine($"{executableAddress} {parameters} \n");
+            Console.WriteLine($"{executableAddress} {string.Join(" ", parameters)} \n");
             Console.ResetColor();
         }
 
